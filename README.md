@@ -44,7 +44,7 @@ python ./rir/embedder_cmd.py --tpu --train_data_path './data/50_above3.csv'
 
 ## [Training](#Training)  
 
-### Base CPM-BERT
+### Base CLFR
 ```commandline
 python ./rir/trainer_cmd.py --tpu --epochs 50 --run_neuralpm --positive_pair_per_restaurant 100 --patience 8 --change_seed --repeat 5 --true_labels_path './data/PMD.csv'
 ```
