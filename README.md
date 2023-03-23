@@ -35,9 +35,9 @@ nltk.download('stopwords')
 nltk.download('wordnet')
 nltk.download('omw-1.4')
 ```
-Create a folder name 'data' and copy PMD.csv and the files in the 'review' folder from [PMD dataset](https://github.com/D3Mlab/rir_data) in the 'data' directory
+Create a folder name 'data' and copy PMD.csv and the files in the 'review' folder from [RIRD dataset](https://github.com/D3Mlab/rir_data) in the 'data' directory
 
-You can also produce embedding .pkl file which is needed for least similar positive and most similar negatives sampling methods, it will create 'BERT_embedded_reviews.pkl', put it under the folder data after it has been created (you can get it from [PMD dataset](https://github.com/D3Mlab/rir_data) as well)
+You can also produce embedding .pkl file which is needed for least similar positive and most similar negatives sampling methods, it will create 'BERT_embedded_reviews.pkl', put it under the folder data after it has been created (you can get it from [RIRD dataset](https://github.com/D3Mlab/rir_data) as well)
 ```commandline
 python ./rir/embedder_cmd.py --tpu --train_data_path './data/50_above3.csv'
 ```
