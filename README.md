@@ -50,7 +50,7 @@ python ./rir/trainer_cmd.py --tpu --epochs 50 --run_neuralpm --positive_pair_per
 ```
 - --tpu when training would be on TPU, and --gpu for GPU otherwise it would be on CPU (trainng on CPU is not recommended since it take so long)
 - --epochs spefies the maximum number of epochs 
-- --run_neuralpm indicates to run Neural Preference Matching after the self-supervised learning is done
+- --run_neuralpm indicates to run RIR inference after the self-supervised learning is done
 - --patience is the patience parameter for the early stopping
 - --repeat specifies number of times the experiment should be repeated 
 - --change_seed means to change the random seed in each experiment repeat
