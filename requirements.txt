@@ -1,0 +1,8 @@
+numpy
+pandas
+tensorflow
+tqdm
+transformers
+nltk
+sklearn
+matplotlib
