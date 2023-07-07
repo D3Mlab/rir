@@ -39,14 +39,14 @@ Create a folder name 'data' and copy PMD.csv and the files in the 'review' folde
 
 You can also produce embedding .pkl file which is needed for least similar positive and most similar negatives sampling methods, it will create 'BERT_embedded_reviews.pkl', put it under the folder data after it has been created (you can get it from [RIRD dataset](https://github.com/D3Mlab/rir_data) as well)
 ```commandline
-python ./Neural_PM/runnersembedder_cmd.py --tpu --train_data_path './data/50_above3.csv'
+python ./Neural_PM/runners/embedder_cmd.py --tpu --train_data_path './data/50_above3.csv'
 ```
 
 ## [Training](#Training)  
 
 ### Base CLFR
 ```commandline
-python ./Neural_PM/runnerstrainer_cmd.py --tpu --epochs 50 --run_neuralpm --positive_pair_per_restaurant 100 --patience 8 --change_seed --repeat 5 --true_labels_path './data/PMD.csv'
+python ./Neural_PM/runners/trainer_cmd.py --tpu --epochs 50 --run_neuralpm --positive_pair_per_restaurant 100 --patience 8 --change_seed --repeat 5 --true_labels_path './data/PMD.csv'
 ```
 - --tpu when training would be on TPU, and --gpu for GPU otherwise it would be on CPU (trainng on CPU is not recommended since it take so long)
 - --epochs spefies the maximum number of epochs 
@@ -59,17 +59,17 @@ python ./Neural_PM/runnerstrainer_cmd.py --tpu --epochs 50 --run_neuralpm --posi
 
 ### Least Similar Positives
 ```commandline
-python ./Neural_PM/runnerstrainer_cmd.py --tpu --epochs 50 --run_neuralpm --least_similar --patience 8 --change_seed --repeat 5 --true_labels_path './data/PMD.csv'
+python ./Neural_PM/runners/trainer_cmd.py --tpu --epochs 50 --run_neuralpm --least_similar --patience 8 --change_seed --repeat 5 --true_labels_path './data/PMD.csv'
 ```
 - --least_similar select least similar pairs as positives pairs for each item (restaurant)
 ### Same Rating Positives
 ```commandline
-python ./Neural_PM/runnerstrainer_cmd.py --tpu --epochs 50 --run_neuralpm --same_rating  --patience 8 --change_seed --repeat 5 --true_labels_path './data/PMD.csv'
+python ./Neural_PM/runners/trainer_cmd.py --tpu --epochs 50 --run_neuralpm --same_rating  --patience 8 --change_seed --repeat 5 --true_labels_path './data/PMD.csv'
 ```
 - --same_rating select same rating pairs as positives pairs for each item (restaurant)
 ### Same Rating and Least Similar Positives
 ```commandline
-python ./Neural_PM/runnerstrainer_cmd.py --tpu --epochs 50 --run_neuralpm --least_similar --same_rating --patience 8 --change_seed --repeat 5 --true_labels_path './data/PMD.csv'
+python ./Neural_PM/runners/trainer_cmd.py --tpu --epochs 50 --run_neuralpm --least_similar --same_rating --patience 8 --change_seed --repeat 5 --true_labels_path './data/PMD.csv'
 ```
 
 ### Hard Negatives
@@ -81,7 +81,7 @@ python ./Neural_PM/runnerstrainer_cmd.py --tpu --epochs 50 --run_neuralpm --hard
 
 ### IR Style Training 
 ```commandline
-python ./Neural_PM/runnerstrainer_cmd.py --tpu --epochs 50 --run_neuralpm --patience 8 --ir_style --ir_sampling_type 'RC' --true_labels_path './data/PMD.csv' --change_seed --repeat 5
+python ./Neural_PM/runners/trainer_cmd.py --tpu --epochs 50 --run_neuralpm --patience 8 --ir_style --ir_sampling_type 'RC' --true_labels_path './data/PMD.csv' --change_seed --repeat 5
 ```
 - --ir_style indicated to use ir style contrastive learning (not using the two level structure)
 - --ir_sampling_type: RC is the random sampling and IC is the independent cropping (refer to paper for details)
@@ -91,18 +91,18 @@ python ./Neural_PM/runnerstrainer_cmd.py --tpu --epochs 50 --run_neuralpm --pati
 
 #### Anchor Subsampling (Span)
 ```commandline
-python ./Neural_PM/runnerstrainer_cmd.py --tpu --epochs 50 --run_neuralpm --subsample_query --positive_pair_per_restaurant 100 --patience 8 --change_seed --repeat 5 --true_labels_path './data/PMD.csv'
+python ./Neural_PM/runners/trainer_cmd.py --tpu --epochs 50 --run_neuralpm --subsample_query --positive_pair_per_restaurant 100 --patience 8 --change_seed --repeat 5 --true_labels_path './data/PMD.csv'
 ```
 - --subsample_query subsamples the query to a span in the training
 #### Anchor Subsampling (Sentence)
 ```commandline
-python ./Neural_PM/runnerstrainer_cmd.py --tpu --epochs 50 --run_neuralpm --subsample_query_sentence --positive_pair_per_restaurant 100 --patience 8 --change_seed --repeat 5 --true_labels_path './data/PMD.csv'
+python ./Neural_PM/runners/trainer_cmd.py --tpu --epochs 50 --run_neuralpm --subsample_query_sentence --positive_pair_per_restaurant 100 --patience 8 --change_seed --repeat 5 --true_labels_path './data/PMD.csv'
 ```
 - subsample_query_sentence subsamples the query to a sentence in the training
 
 #### Prepending Meta Data (PPMD)
 ```commandline
-python ./Neural_PM/runnerstrainer_cmd.py --tpu --epochs 50 --run_neuralpm --prepend_neuralpm --patience 8 --change_seed --repeat 5 --true_labels_path './data/PMD.csv'
+python ./Neural_PM/runners/trainer_cmd.py --tpu --epochs 50 --run_neuralpm --prepend_neuralpm --patience 8 --change_seed --repeat 5 --true_labels_path './data/PMD.csv'
 ```
 - --prepend_neuralpm prepends the category type of item to review text in the inference
 
@@ -115,7 +115,7 @@ python ./Neural_PM/runnerssave_warmups.py --tpu
 
 ### Learning Item Embedding
 ```commandline
-python ./Neural_PM/runnerstrainer_cmd.py --tpu --item_embedding --warmup --warmup_weights './item_embeddings_BERT.pickle' --epochs 50 --positive_pair_per_restaurant 300 --run_neuralpm --patience 8
+python ./Neural_PM/runners/trainer_cmd.py --tpu --item_embedding --warmup --warmup_weights './item_embeddings_BERT.pickle' --epochs 50 --positive_pair_per_restaurant 300 --run_neuralpm --patience 8
 ```
 - --item_embedding indicates to learn item embeddings
 - --warmup_weights specifies the address for war up weights file
@@ -142,12 +142,12 @@ python ./Neural_PM/runners/runner_cmd.py --tpu --from_pt --true_labels_path ./da
 
 ### BM25
 ```commandline
-python ./Neural_PM/runnersrunner_BM25.py  --true_labels_path './data/PMD.csv' 
+python ./Neural_PM/runners/runner_BM25.py  --true_labels_path './data/PMD.csv' 
 ```
 
 ### TF IDF
 ```commandline
-python ./Neural_PM/runnersrunner_cmd.py --tf_idf --true_labels_path './data/PMD.csv' 
+python ./Neural_PM/runners/runner_cmd.py --tf_idf --true_labels_path './data/PMD.csv' 
 ```
 
 
