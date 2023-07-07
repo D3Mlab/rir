@@ -125,7 +125,14 @@ python ./rir/trainer_cmd.py --tpu --item_embedding --warmup --warmup_weights './
 
 ### Pretrained langauge models for RIR
 ```commandline
-python ./rir/runner_cmd.py --tpu --from_pt --true_labels_path './data/PMD.csv' --model_name 'Luyu/condenser' --tokenizer_name 'Luyu/condenser'
+#### If you don't have a TPU
+
+python ./Neural_PM/runners/runner_cmd.py --from_pt --true_labels_path ./data/PMD.csv --model_name Luyu/condenser --tokenizer_name Luyu/condenser
+
+#### If you have a TPU
+
+python ./Neural_PM/runners/runner_cmd.py --tpu --from_pt --true_labels_path ./data/PMD.csv --model_name Luyu/condenser --tokenizer_name Luyu/condenser
+
 ```
 - --tokenizer_name and --model_name specify the model name and tokenizer name, it should be from https://huggingface.co/models or a local path
 - --from_pt when the original model is on Pytorch on Huggingface (that's usually the case, so always pass this argument)

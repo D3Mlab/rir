@@ -6,3 +6,6 @@ transformers
 nltk
 sklearn
 matplotlib
+scipy
+beautifulsoup4
+scikit-learn
